@@ -1,9 +1,11 @@
-﻿#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <clocale>
+#include <windows.h>
 //050504 Кашевский Арсений
 //9. Рассортировать элементы главной диагонали матрицы 10x10 по возрастанию.
-const int size = 10;
+//Лютая жесть, зато работает.
+const int size = 155; //Не ставить больше 155 для правильного вывода матрицы в консоли
 int matrix[size][size];
 int diag[size];
 void init_matrix();
@@ -54,10 +56,16 @@ void sort_matrix() {
 }
 
 void output_matrix() {
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	for (int i = 0; i < size; i++) {
 		for (int j = 0; j < size; j++) {
+			if (i == j) {
+				SetConsoleTextAttribute(hConsole, rand() % 14 + 2);
+			}
 			printf(" %d", matrix[i][j]);
+			SetConsoleTextAttribute(hConsole, 15);
 		}
 		printf("\n");
 	}
+	SetConsoleTextAttribute(hConsole, 15);
 }
