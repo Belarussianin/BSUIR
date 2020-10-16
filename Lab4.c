@@ -1,41 +1,49 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
+#define SIZE 10
 
-void bubble(int*, int);
-int* init(int*);
+void init();
 void output(int*);
+int mas[SIZE];
+int mas2[SIZE];
 
 int main() {
-	int mas[10]; // Obiavliaem massiv
-	init(mas);   // Zapolniaem massiv chislami ot -10 do 9
-	bubble(mas, 10); // Sortiruem metodom bubbl'a
-	output(mas); // Vivodim massiv
-	return 0;
+    int j = 0;
+    init(SIZE);   // Fill array with nums from -5 to 5
+    output(mas);  // Output of array mas
+    for (int i = 0; i < SIZE; i++) { // Fill mas2 with -nums
+        if(mas[i] < 0) {
+            mas2[j] = mas[i];
+            j++;
+        }
+    }
+    for (int i = 0; i < SIZE; i++) { // Fill mas2 with zero's
+        if(mas[i] == 0) {
+            mas2[j] = mas[i];
+            j++;
+        }
+    }
+    for (int i = 0; i < SIZE; i++) { // Fill mas2 with +nums
+        if(mas[i] > 0) {
+            mas2[j] = mas[i];
+            j++;
+        }
+    }
+    output(mas2); // Output of array mas2
+    return 0;
 }
 
-void bubble(int* mas, int size) {
-	for (int i = 0; i < size - 1; i++) {
-		for (int j = (size - 1); j > i; j--) {
-			if (mas[j - 1] > mas[j]) {
-				int temp = mas[j - 1];
-
-				mas[j - 1] = mas[j];
-				mas[j] = temp;
-			}
-		}
-	}
-}
-
-int* init(int* mas) {
-	srand( time(NULL) );
-	for (int i = 0; i < sizeof(mas); i++) {
-		mas[i] = rand() % 20 - 10;
-	}
-	return mas;
+void init() {
+    srand( time(NULL) );
+    for (int i = 0; i < SIZE; i++) {
+        mas[i] = rand() % 10 - 5;
+    }
 }
 
 void output(int* mas) {
-	for (int i = 0; i < sizeof(mas); i++) {
-		printf("%d ", mas[i]);
-	}
+    for (int i = 0; i < SIZE; i++) {
+        printf("%d ", mas[i]);
+    }
+    printf("\n");
 }
