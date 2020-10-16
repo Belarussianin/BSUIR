@@ -1,4 +1,4 @@
-/*#include <stdlib.h>
+#include <stdlib.h>
 #include <stdio.h>
 
 int mas[5][6];   // Obiavliaem massiv
@@ -45,4 +45,4 @@ void output() {
 		sum = 0;
 		count = 0;
 	}
-}*/
+}
