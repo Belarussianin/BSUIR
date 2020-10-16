@@ -1,4 +1,4 @@
-/*#include <stdlib.h>
+#include <stdlib.h>
 #include <stdio.h>
 
 void bubble(int*, int);
@@ -38,4 +38,4 @@ void output(int* mas) {
 	for (int i = 0; i < sizeof(mas); i++) {
 		printf("%d ", mas[i]);
 	}
-}*/
+}
