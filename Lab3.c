@@ -1,7 +1,5 @@
 //Написать программу, которая выдает все способы представления числа n в виде суммы n=b1 + … +bk, где k, b1,…,bk > 0.
 //Lab3 #9 Кашевский Арсений
-//https://www.cyberforum.ru/turbo-pascal/thread1436314.html
-
 #include <stdio.h>
 
 void recursive(int, int, int, int, int*);
