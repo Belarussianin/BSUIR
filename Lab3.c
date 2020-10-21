@@ -11,6 +11,8 @@ int main() {
     printf("Enter num:");
     while(status != 1 || n == 0 || n < 0) {
         status = scanf_s("%d", &n);
+        if (n == 0) printf("num = 0 or not number, reenter\n");
+        if (n < 0) printf("num < 0, reenter\n");
         rewind(stdin);
     }
     recursive(1,1,0, n, arr);
