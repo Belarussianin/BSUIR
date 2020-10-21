@@ -5,11 +5,11 @@
 void recursive(int, int, int, int, int*);
 
 int main() {
-    int arr[40];
+    int arr[1000];
     int n = 0, status = 0;
 
     printf("Enter num:");
-    while(status != 1) {
+    while(status != 1 || n == 0 || n < 0) {
         status = scanf_s("%d", &n);
         rewind(stdin);
     }
