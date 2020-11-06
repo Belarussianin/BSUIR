@@ -3,24 +3,41 @@
 //все цифры, начиная с третьей (например, ab+0.1973-1.1 преобразуется в ab+0.10-1.1).
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 #include <ctype.h>
+#include <time.h>
 
 int n = 0;
 char *str;
 char *str2;
+void enter_str();
 void rand_str();
 void del_num();
 
 int main() {
     printf("Enter num of chars: ");
     scanf_s("%d", &n);
+    rewind(stdin);
 
-    str = (char*)calloc(n, sizeof(char));
-    rand_str();
-    del_num();
+    str = (char*)calloc(n + 1, sizeof(char));
+
+    //rand_str(); //"Случайная" генерация символов
+    enter_str(); // Ручной ввод символов
+
+    del_num(); // Преобразовывает str в str2 по условию
+    printf("Array of chars2: ");
+    puts(str2);
+
     free(str);
+    free(str2);
     return 0;
+}
+
+void enter_str() {
+    printf("Array of chars: ");
+    for (int i = 0; i < n; i++) {
+        str[i] = (char)getchar();
+    }
+    printf("\n");
 }
 
 void rand_str() {
@@ -48,7 +65,7 @@ void del_num() {
             }
         }
     }
-    str2 = (char*) calloc( n - count, sizeof(char));
+    str2 = (char*) calloc( n + 1 - count, sizeof(char));
     int i2 = 0;
 
     for (int i = 0; i < n; i++) {
@@ -57,9 +74,4 @@ void del_num() {
             i2++;
         }
     }
-    printf("Array of chars2: ");
-    for (int i = 0; i < n - count; i++) {
-        printf("%c", str2[i]);
-    }
-    free(str2);
 }
