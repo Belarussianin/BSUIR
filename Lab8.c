@@ -2,13 +2,13 @@
 //Каждое предложение в тексте заканчивается точкой. Выделять слова с удвоенной гласной.
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
 #include <locale.h>
 #define I 5
 #define J 300
 char **ln_text;
 void emphasizing(int, int);
 int isVowel(char);
+int isAlpha(unsigned char);
 
 int main() {
     setlocale(LC_ALL, "RU");
@@ -50,7 +50,7 @@ void emphasizing(int index, int Columns) {
             words[j] = 46;
             break;
         }
-        if (isalpha((unsigned char)ln_text[index][j]) != 0) {
+        if (isAlpha(ln_text[index][j])) {
             count++;
             if (isVowel(ln_text[index][j]) && isVowel(ln_text[index][j + 1]) && ln_text[index][j] == ln_text[index][j + 1]) { //Если гласные и равны
                 status = 1;
@@ -89,5 +89,11 @@ int isVowel(char symbol) {
     for (int i = 0; i < 20; ++i) {
         if (symbol == vowels[i]) return 1;
     }
+    return 0;
+}
+
+int isAlpha(unsigned char sym) { //Функция для проверки на русские и английские буквы
+    if (((int)sym >= 65 && (int)sym <= 90) || ((int)sym >= 97 && (int)sym <= 122)) return 1;
+    if (((int)sym >= 192 && (int)sym <= 255)) return 1;
     return 0;
 }
