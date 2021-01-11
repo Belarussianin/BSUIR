@@ -1,0 +1,63 @@
+//Билет 35
+//1. Сортировать матрицу выше главной диагонали методом отбора используя функцию, в которую передается указатель на матрицу
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
+
+int** mSort(int** matrix, int size);
+
+int main() {
+    int** matrix = (int**)calloc(5, sizeof(int*));
+    for (int i = 0; i < 5; ++i) matrix[i] = (int*)calloc(5, sizeof(int));
+
+    srand(time(NULL));
+    for (int i = 0; i < 5; ++i) {
+        for (int j = 0; j < 5; ++j) {
+            matrix[i][j] = rand() % 10;
+            printf("%d ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+    matrix = mSort(matrix, 5);
+    for (int i = 0; i < 5; ++i) {
+        for (int j = 0; j < 5; ++j) {
+            printf("%d ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+
+    for (int i = 0; i < 5; ++i) free(matrix[i]);
+    free(matrix);
+    return 0;
+}
+////ПО УСЛОВИЮ БИЛЕТА НУЖНА ТОЛЬКО ФУНКЦИЯ, MAIN ДЛЯ ДЕМОНСТРАЦИИ РАБОТЫ.
+int** mSort(int** matrix, int size) {
+    int numCount = (size * size - size) / 2;        //Кол-во элементов выше главной диагонали
+    int* mas = (int*)calloc(numCount, sizeof(int)); //Массив для элементов
+    int k = 0;                                      //Счётчик для элементов
+    for (int i = 0; i < size; ++i) {                //Запись всех элементов выше главной диагонали из матрицы в массив
+        for (int j = i + 1; j < size; ++j) {
+            mas[k] = matrix[i][j];
+            k++;
+        }
+    }
+    for (int i = 0; i < numCount - 1; i++) {        //Сортировка выбором массива элементов
+        int min = i;
+        for (int j = i + 1; j < numCount; j++) {
+            if (mas[j] < mas[min]) min = j;
+        }
+        int temp = mas[i];
+        mas[i] = mas[min];
+        mas[min] = temp;
+    }
+    k = 0;
+    for (int i = 0; i < size; ++i) {
+        for (int j = i + 1; j < size; ++j) {
+            matrix[i][j] = mas[k];
+            k++;
+        }
+    }
+    free(mas);
+    return matrix;
+}
